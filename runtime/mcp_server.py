@@ -124,3 +124,21 @@ def get_pools() -> str:
 
 if __name__ == "__main__":
     mcp.run()
+
+@mcp.tool()
+def get_verification(fund: str = "") -> str:
+    """Claim-vs-observed verification: issuer claims (factsheets, official calendars)
+    checked against on-chain/document-layer observations. Three-state verdicts:
+    consistent / discrepant / untestable, each with evidence links. Optional fund
+    substring filter. Discrepant findings are the signal - e.g. a fund claiming
+    monthly redemptions while the contract runs 14-day epochs."""
+    d = _get("verification.json")
+    verdicts = d.get("verdicts") or []
+    if fund:
+        verdicts = [v for v in verdicts
+                    if fund.lower() in (v.get("token") or "").lower()
+                    or fund.lower() in (v.get("issuer") or "").lower()]
+    return json.dumps({"generated": d.get("generated"),
+                       "counts": d.get("counts"),
+                       "shown": len(verdicts[:40]),
+                       "verdicts": verdicts[:40]})
