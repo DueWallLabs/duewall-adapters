@@ -154,3 +154,34 @@ publish.
 
 - Code: [MIT](LICENSE) © 2026 DueWall Labs
 - Data snapshots: [CC-BY 4.0](data-snapshots/LICENSE-CC-BY-4.0.txt)
+
+## MCP server (for AI agents)
+
+`runtime/mcp_server.py` exposes the public duewall.com API as **Model Context
+Protocol tools** — Claude Desktop, Claude Code, or any MCP client can answer
+tokenized-credit questions with the live data behind duewall.com.
+
+```bash
+pip install "mcp>=1,<3"          # 1.x and 2.x both supported
+python runtime/mcp_server.py     # stdio transport
+```
+
+Claude Desktop config (claude_desktop_config.json):
+
+    {
+      "mcpServers": {
+        "duewall": {
+          "command": "python",
+          "args": ["/path/to/duewall-adapters/runtime/mcp_server.py"]
+        }
+      }
+    }
+
+Tools: `get_dli` (index), `get_dcr` (SSR rate), `get_events` (filterable, newest
+first), `get_upcoming_maturities(days)` (the forward-looking liability layer),
+`get_terms` (human-verified liquidity terms), `get_pools` (TVL/APY snapshot).
+
+Same rules as the site: CC-BY data, per-record source links, grade A = human-verified,
+B = machine-collected, M = mixed, honest dashes where the chain does not answer.
+Optional env `DUEWALL_API_KEY_FILE` points to a file holding a free API key
+(1,000 req/day, https://duewall.com/account). Not investment advice.
