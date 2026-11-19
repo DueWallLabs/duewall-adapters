@@ -185,3 +185,9 @@ Same rules as the site: CC-BY data, per-record source links, grade A = human-ver
 B = machine-collected, M = mixed, honest dashes where the chain does not answer.
 Optional env `DUEWALL_API_KEY_FILE` points to a file holding a free API key
 (1,000 req/day, https://duewall.com/account). Not investment advice.
+
+**Interface policy (dual protocol):** REST is the source of truth — metering, API keys and
+the commercial tier live there. This MCP server is a key-less read-only **discovery surface**
+for agents, reading the same public snapshots (zero data fork). Verification request and
+report-ordering flows are Web processes and will not be MCP-ified: agents get read-only
+verdict data (`get_verification`), humans get the process on duewall.com.
