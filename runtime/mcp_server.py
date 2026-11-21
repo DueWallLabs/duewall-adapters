@@ -122,9 +122,6 @@ def get_pools() -> str:
     return json.dumps(out)
 
 
-if __name__ == "__main__":
-    mcp.run()
-
 @mcp.tool()
 def get_verification(fund: str = "") -> str:
     """Claim-vs-observed verification: issuer claims (factsheets, official calendars)
@@ -142,3 +139,27 @@ def get_verification(fund: str = "") -> str:
                        "counts": d.get("counts"),
                        "shown": len(verdicts[:40]),
                        "verdicts": verdicts[:40]})
+
+
+@mcp.tool()
+def get_allowlist() -> str:
+    """Rule-based verified-issuer allow-list for investment-policy engines: funds
+    with grade-A human-verified terms AND zero discrepant checks. Rules-hashed,
+    append-only history, Bitcoin-anchored. Membership changes publish with
+    evidence — no discretionary overrides (earned, never bought)."""
+    d = _get("allowlist.json")
+    return json.dumps({"generated": d.get("generated"), "date": d.get("date"),
+                       "rules_hash": d.get("rules_hash"),
+                       "counts": d.get("counts"),
+                       "members": [{"name": m.get("name"), "issuer": m.get("issuer"),
+                                    "liquidity": (m.get("terms") or {}).get("liquidity"),
+                                    "settlement": (m.get("terms") or {}).get("settlement"),
+                                    "domicile": (m.get("terms") or {}).get("domicile"),
+                                    "checks": m.get("checks")}
+                                   for m in (d.get("members") or [])],
+                       "excluded": d.get("excluded"),
+                       "events": d.get("events")})
+
+
+if __name__ == "__main__":
+    mcp.run()
