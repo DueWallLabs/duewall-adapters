@@ -157,9 +157,15 @@ publish.
 
 ## MCP server (for AI agents)
 
-`runtime/mcp_server.py` exposes the public duewall.com API as **Model Context
-Protocol tools** — Claude Desktop, Claude Code, or any MCP client can answer
-tokenized-credit questions with the live data behind duewall.com.
+**Two ways to connect — same 8 tools, same daily snapshots:**
+
+**1. Remote endpoint (no install, recommended):** `POST https://duewall.com/mcp`
+— key-less read-only JSON-RPC (protocol 2025-06-18), CORS-enabled. In Claude
+Desktop / Claude Code / Cursor, add it as a *remote MCP server* with that URL.
+That's it.
+
+**2. Local stdio server:** `runtime/mcp_server.py` — for clients that prefer a
+local process:
 
 ```bash
 pip install "mcp>=1,<3"          # 1.x and 2.x both supported
@@ -176,6 +182,9 @@ Claude Desktop config (claude_desktop_config.json):
         }
       }
     }
+
+Tools: `get_dli`, `get_dcr`, `get_events`, `get_upcoming_maturities`,
+`get_terms`, `get_pools`, `get_verification`, `get_verification_log`.
 
 Tools: `get_dli` (index), `get_dcr` (SSR rate), `get_events` (filterable, newest
 first), `get_upcoming_maturities(days)` (the forward-looking liability layer),
