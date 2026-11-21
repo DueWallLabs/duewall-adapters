@@ -1,0 +1,24 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.OneLight1688/duewall-adapters",
+  "title": "DueWall — Tokenized Credit Data",
+  "description": "Read-only MCP server for DueWall (duewall.com): tokenized private credit data — DLI index, DCR reference rate, debt calendar events (D1/E1/R1), upcoming maturities, human-verified liquidity terms, pool TVL/APY, and claim-vs-observed verification verdicts (three-state, evidence-linked). Bitcoin-anchored, CC-BY.",
+  "version": "0.3.0",
+  "websiteUrl": "https://duewall.com",
+  "icons": [
+    {
+      "src": "https://duewall.com/favicon.png",
+      "mimeType": "image/png",
+      "sizes": ["64x64"]
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/OneLight1688/duewall-adapters",
+    "source": "github"
+  },
+  "transport": {
+    "type": "stdio",
+    "command": "python3",
+    "args": ["runtime/mcp_server.py"]
+  }
+}
