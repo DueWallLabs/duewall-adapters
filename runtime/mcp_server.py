@@ -161,5 +161,32 @@ def get_allowlist() -> str:
                        "events": d.get("events")})
 
 
+@mcp.tool()
+def get_flows(fund: str = "") -> str:
+    """Per-fund daily NET capital flows (FLW2) from on-chain totalIssuance daily
+    anchors: net_shares / net_usd / tvl_usd per day. Conservation-exact: the sum
+    of daily deltas equals final token supply, checked every build. Optional fund
+    substring filter (e.g. jaaa). Daily series trimmed to the most recent 90 days
+    per fund; all-time in/out/net aggregates always included. Full series:
+    https://duewall.com/api/v1/flows.json"""
+    from datetime import datetime, timedelta, timezone
+    d = _get("flows.json")
+    funds = d.get("funds") or []
+    if fund:
+        funds = [f for f in funds
+                 if fund.lower() in (f.get("token") or "").lower()
+                 or fund.lower() in (f.get("name") or "").lower()]
+    out = []
+    for f in funds:
+        out.append({"token": f.get("token"), "name": f.get("name"),
+                    "grade": f.get("grade"), "tvl_usd": f.get("tvl_usd"),
+                    "all_time": f.get("all_time"),
+                    "daily": (f.get("daily") or [])[-90:]})
+    return json.dumps({"generated": d.get("generated"), "rules_hash": d.get("rules_hash"),
+                       "counts": {**d.get("counts", {}), "shown": len(out)},
+                       "funds": out,
+                       "note": "daily trimmed to most recent 90 days per fund"})
+
+
 if __name__ == "__main__":
     mcp.run()
