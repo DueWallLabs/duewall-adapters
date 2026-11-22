@@ -185,7 +185,8 @@ def get_flows(fund: str = "") -> str:
     return json.dumps({"generated": d.get("generated"), "rules_hash": d.get("rules_hash"),
                        "counts": {**d.get("counts", {}), "shown": len(out)},
                        "funds": out,
-                       "note": "daily trimmed to most recent 90 days per fund"})
+                       "events": (d.get("events") or [])[:20],
+                       "note": "daily trimmed to most recent 90 days per fund; events = large executions (|USD|>=1M) at minute-level"})
 
 
 if __name__ == "__main__":
