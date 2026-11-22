@@ -112,6 +112,7 @@ The full dataset behind this repo is also served as static JSON at
 curl https://duewall.com/api/v1/events.json   # all events (schema v1.2), each with a coverage grade
 curl https://duewall.com/api/v1/terms.json    # liquidity terms per fund (grade included)
 curl https://duewall.com/api/v1/pools.json    # pool NAV + TVL/APY snapshot
+curl https://duewall.com/api/v1/flows.json    # daily NET capital flows per fund (FLW2, conservation-exact)
 curl https://duewall.com/api/v1/meta.json     # version, counts, license
 ```
 
@@ -184,11 +185,13 @@ Claude Desktop config (claude_desktop_config.json):
     }
 
 Tools: `get_dli`, `get_dcr`, `get_events`, `get_upcoming_maturities`,
-`get_terms`, `get_pools`, `get_verification`, `get_verification_log`.
+`get_terms`, `get_pools`, `get_verification`, `get_verification_log`,
+`get_allowlist`, `get_flows`.
 
 Tools: `get_dli` (index), `get_dcr` (SSR rate), `get_events` (filterable, newest
 first), `get_upcoming_maturities(days)` (the forward-looking liability layer),
-`get_terms` (human-verified liquidity terms), `get_pools` (TVL/APY snapshot).
+`get_terms` (human-verified liquidity terms), `get_pools` (TVL/APY snapshot),
+`get_flows` (daily NET capital flows per fund — conservation-exact).
 
 Same rules as the site: CC-BY data, per-record source links, grade A = human-verified,
 B = machine-collected, M = mixed, honest dashes where the chain does not answer.
