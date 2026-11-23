@@ -29,4 +29,6 @@ jobs:
           mcp-publisher --version
 
       - name: Publish to registry
-        run: mcp-publisher publish --signaloidc
+        run: |
+          mcp-publisher login github-oidc
+          mcp-publisher publish
