@@ -27,7 +27,7 @@ mcp = FastMCP("duewall")
 
 
 def _get(path):
-    headers = {"User-Agent": "DueWallMCP/1.0 (github.com/OneLight1688/duewall-adapters)"}
+    headers = {"User-Agent": "DueWallMCP/1.0 (github.com/DueWallLabs/duewall-adapters)"}
     if API_KEY_FILE and os.path.exists(API_KEY_FILE):
         headers["Authorization"] = "Bearer " + open(API_KEY_FILE).read().strip()
     req = urllib.request.Request(API + "/" + path, headers=headers)

@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://github.com/OneLight1688/duewall-adapters/profiles/schema.json",
+  "$id": "https://github.com/DueWallLabs/duewall-adapters/profiles/schema.json",
   "title": "DueWall issuer profile v1",
   "description": "Declarative per-issuer config for the universal adapter runtime. One runtime, many profiles. See docs/PROFILE_SPEC.md.",
   "type": "object",
