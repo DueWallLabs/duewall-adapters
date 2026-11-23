@@ -1,6 +1,6 @@
 # Publish server.json to the official MCP Registry on every change.
 # Auth = GitHub OIDC of this repo (no account, no key): mcp-publisher --signaloidc
-# requires the server.json "name" to match this repo's owner/repo.
+# requires the server.json "name" to match this repo's owner/repo (lowercase).
 name: Publish MCP server.json
 
 on:
@@ -21,9 +21,11 @@ jobs:
 
       - name: Install mcp-publisher
         run: |
-          curl -fsSL "https://raw.githubusercontent.com/modelcontextprotocol/registry/main/scripts/install-mcp-publisher.sh" | bash
-          if [ -f ./mcp-publisher ]; then sudo mv ./mcp-publisher /usr/local/bin/mcp-publisher; fi
-          chmod +x /usr/local/bin/mcp-publisher 2>/dev/null || true
+          VER=$(curl -fsSL https://api.github.com/repos/modelcontextprotocol/registry/releases/latest | grep -o '"tag_name": *"[^"]*"' | cut -d'"' -f4)
+          echo "mcp-publisher version: $VER"
+          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/download/${VER}/mcp-publisher_linux_amd64.tar.gz" -o mp.tgz
+          tar -xzf mp.tgz
+          sudo install -m 755 ./mcp-publisher /usr/local/bin/mcp-publisher
           mcp-publisher --version
 
       - name: Publish to registry
