@@ -166,7 +166,8 @@ def get_flows(fund: str = "") -> str:
     """Per-fund daily NET capital flows (FLW3) from on-chain totalIssuance daily
     anchors: net_shares / net_usd / tvl_usd per day. Conservation telescopes
     exactly within the observed window; mid-life series are full quality (all-time
-    aggregates are floors); structural discontinuities flagged degraded. Optional fund
+    aggregates are floors); structural resets flagged tape_quality=degraded
+    (trade-side observation, unrelated to fund grades). Optional fund
     substring filter (e.g. jaaa). Daily series trimmed to the most recent 90 days
     per fund; all-time in/out/net aggregates always included. Full series:
     https://duewall.com/api/v1/flows.json"""

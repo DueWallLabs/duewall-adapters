@@ -3,7 +3,7 @@
   "name": "io.github.DueWallLabs/duewall-adapters",
   "title": "DueWall — Tokenized Credit Data",
   "description": "Read-only MCP server for DueWall: DLI index, DCR rate, maturities, flows and verification verdicts.",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "websiteUrl": "https://duewall.com",
   "icons": [
     {
