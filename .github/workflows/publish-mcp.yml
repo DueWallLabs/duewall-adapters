@@ -23,9 +23,12 @@ jobs:
 
       - name: Install mcp-publisher
         run: |
-          VER=$(curl -fsSL https://api.github.com/repos/modelcontextprotocol/registry/releases/latest | grep -o '"tag_name": *"[^"]*"' | cut -d'"' -f4)
-          echo "mcp-publisher version: $VER"
-          curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/download/${VER}/mcp-publisher_linux_amd64.tar.gz" -o mp.tgz
+          # 不走 api.github.com（Actions 共享 IP 未认证限额 60/h，曾被限流打挂）——
+          # 用 releases/latest/download 稳定重定向 + 3 次重试
+          for i in 1 2 3; do
+            curl -fsSL "https://github.com/modelcontextprotocol/registry/releases/latest/download/mcp-publisher_linux_amd64.tar.gz" -o mp.tgz && break
+            echo "download retry $i"; sleep 10
+          done
           tar -xzf mp.tgz
           sudo install -m 755 ./mcp-publisher /usr/local/bin/mcp-publisher
           mcp-publisher --version
