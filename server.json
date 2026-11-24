@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.duewalllabs/duewall-adapters",
   "title": "DueWall — Tokenized Credit Data",
-  "description": "Read-only MCP server for DueWall (duewall.com): tokenized private credit data — DLI index, DCR reference rate, debt calendar events (D1/E1/R1), upcoming maturities, human-verified liquidity terms, pool TVL/APY, and claim-vs-observed verification verdicts (three-state, evidence-linked). Bitcoin-anchored, CC-BY.",
+  "description": "Read-only MCP server for DueWall: DLI index, DCR rate, maturities, flows and verification verdicts.",
   "version": "0.3.4",
   "websiteUrl": "https://duewall.com",
   "icons": [
