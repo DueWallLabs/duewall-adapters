@@ -112,7 +112,7 @@ The full dataset behind this repo is also served as static JSON at
 curl https://duewall.com/api/v1/events.json   # all events (schema v1.2), each with a coverage grade
 curl https://duewall.com/api/v1/terms.json    # liquidity terms per fund (grade included)
 curl https://duewall.com/api/v1/pools.json    # pool NAV + TVL/APY snapshot
-curl https://duewall.com/api/v1/flows.json    # daily NET capital flows per fund (FLW2, conservation-exact)
+curl https://duewall.com/api/v1/flows.json    # daily NET capital flows per fund (FLW3, window-conservation)
 curl https://duewall.com/api/v1/meta.json     # version, counts, license
 ```
 
