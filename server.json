@@ -1,9 +1,9 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.duewalllabs/duewall-adapters",
+  "name": "io.github.DueWallLabs/duewall-adapters",
   "title": "DueWall — Tokenized Credit Data",
   "description": "Read-only MCP server for DueWall: DLI index, DCR rate, maturities, flows and verification verdicts.",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "websiteUrl": "https://duewall.com",
   "icons": [
     {
